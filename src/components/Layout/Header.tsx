@@ -9,6 +9,7 @@ import { IoCartOutline, IoSearchOutline } from 'react-icons/io5';
 import MenuItems from './MenuItems';
 import { CiHeart } from 'react-icons/ci';
 import { CgProfile } from 'react-icons/cg';
+import Profile from './Profile';
 
 const languages = [
   { name: "English", flag: "/english.png" },
@@ -19,6 +20,7 @@ const languages = [
 const Header = () => {
   const pathName = usePathname();
   const [activeLanguage, setActiveLanguage] = useState({ name: "Hindi", flag: "/Indian-Flag.png" })
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
   return (
@@ -70,37 +72,38 @@ const Header = () => {
           <div className='relative group me-2 sm:me-4 py-2 sm:py-4'>
             <CgProfile className='text-xl sm:text-2xl cursor-pointer' />
             {/* Dropdown Menu */}
-            <div className="absolute hidden group-hover:block sm:group-hover:block 
-                bg-white shadow-lg rounded-2xl p-3 w-[180px] sm:w-[220px] 
-                left-[-70px] sm:left-[-180px] top-10 sm:top-14 
-                z-50 transition-all duration-200 ease-in-out">
+            {isLoggedIn
+              ? (<div className="absolute hidden group-hover:block sm:group-hover:block bg-white shadow-lg rounded-2xl p-3 w-[180px] sm:w-[220px] left-[-70px] sm:left-[-180px] top-10 sm:top-14 z-50 transition-all duration-200 ease-in-out">
 
-              <div className='flex flex-col items-center space-y-2 sm:space-y-3'>
-                <Link
-                  href={'/register'}
-                  className='text-[#f76411] bg-orange-100 
+                <div className='flex flex-col items-center space-y-2 sm:space-y-3'>
+                  <Link
+                    href={'/register'}
+                    className='text-[#f76411] bg-orange-100 
                   py-1 sm:py-2 px-3 sm:px-4 rounded-2xl 
                   cursor-pointer text-sm sm:text-base 
                   w-full text-center transition-colors duration-200 
                   hover:bg-orange-200'
-                >
-                  Register Your Account
-                </Link>
+                  >
+                    Register Your Account
+                  </Link>
 
-                <span className='text-xs sm:text-sm text-gray-500'>OR</span>
+                  <span className='text-xs sm:text-sm text-gray-500'>OR</span>
 
-                <Link
-                  href={'/login'}
-                  className='text-white bg-[#f76411] 
+                  <Link
+                    href={'/login'}
+                    className='text-white bg-[#f76411] 
                     py-1 sm:py-2 px-3 sm:px-4 rounded-2xl 
                     cursor-pointer text-sm sm:text-base 
                     w-full text-center transition-colors duration-200 
                     hover:bg-[#e55b0f]'
-                >
-                  Login to your account
-                </Link>
-              </div>
-            </div>
+                  >
+                    Login to your account
+                  </Link>
+                </div>
+              </div>)
+              : (<div className='absolute hidden group-hover:block sm:group-hover:block bg-white w-[180px] sm:w-[220px] left-[-70px] sm:left-[-180px] top-10 sm:top-14 z-50 transition-all duration-200 ease-in-out'>
+                <Profile user={{ avatarUrl: "", name: "Manikanta", phone: "123456789" }} />
+              </div>)}
           </div>
           <div>
             <IoCartOutline className='text-2xl' />
